@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Category::withCount('events')->latest();
+        // Use stored `events_count` column so jumlah event bisa di-CRUD secara manual
+        $query = Category::latest();
 
         if ($request->filled('search')) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
@@ -31,10 +32,14 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
+            'events_count' => 'nullable|integer|min:0',
         ]);
 
         // Generate slug from name
         $data['slug'] = Str::slug($data['name']);
+
+        // Ensure events_count has a value
+        $data['events_count'] = $data['events_count'] ?? 0;
 
         Category::create($data);
 
@@ -56,10 +61,14 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'events_count' => 'nullable|integer|min:0',
         ]);
 
         // Generate slug from name
         $data['slug'] = Str::slug($data['name']);
+
+        // Ensure events_count has a value
+        $data['events_count'] = $data['events_count'] ?? 0;
 
         $category->update($data);
 

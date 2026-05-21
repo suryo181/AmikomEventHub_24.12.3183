@@ -36,6 +36,15 @@
                 <p class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-600">{{ $category->slug }}</p>
             </div>
 
+            <div class="mb-6">
+                <label for="events_count" class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Event (manual)</label>
+                <input type="number" name="events_count" id="events_count" min="0" class="w-40 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 @error('events_count') border-red-500 @enderror" placeholder="0" value="{{ old('events_count', $category->events_count ?? 0) }}">
+                @error('events_count')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+                <p class="text-gray-500 text-sm mt-2">Nilai ini disimpan manual dan tidak otomatis menghitung relasi event.</p>
+            </div>
+
             <div class="flex gap-3">
                 <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded font-semibold hover:bg-indigo-700 transition">
                     Perbarui Kategori
