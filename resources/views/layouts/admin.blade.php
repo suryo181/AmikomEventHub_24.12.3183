@@ -76,7 +76,7 @@
             </a>
         </nav>
 
-        <div class="pt-6 border-t border-indigo-800">
+        <div class="pt-6 border-t border-indigo-800 space-y-2">
             <a href="{{ route('home') }}"
                 class="flex items-center gap-3 px-4 py-3 text-indigo-300 hover:text-white transition font-medium">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,6 +86,13 @@
                 </svg>
                 Ke Halaman User
             </a>
+            <form method="POST" action="{{ route('admin.logout') }}" class="mt-4">
+                @csrf
+                <button type="submit"
+                    class="w-full rounded-3xl bg-slate-700 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800 transition">
+                    Logout Admin
+                </button>
+            </form>
         </div>
     </aside>
 

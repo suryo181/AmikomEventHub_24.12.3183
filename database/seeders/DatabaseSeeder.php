@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin Amikom',
             'email' => 'admin@amikom.ac.id',
-            'password' => bcrypt('password'),
+            'password' => 'admin123',
             'role' => 'admin',
         ]);
 
