@@ -26,7 +26,12 @@
             <tbody>
                 @forelse($events as $event)
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                    <td class="p-4 text-gray-800">{{ $event->title }}</td>
+                    <td class="p-4 text-gray-800">
+                        <div class="flex items-center gap-3">
+                            <img src="{{ ($event->poster_path && Storage::disk('public')->exists($event->poster_path)) ? asset('storage/' . $event->poster_path) : 'https://placehold.co/80x100' }}" alt="{{ $event->title }}" class="w-14 h-16 object-cover rounded border border-gray-200">
+                            <span>{{ $event->title }}</span>
+                        </div>
+                    </td>
                     <td class="p-4 text-indigo-600">{{ $event->category->name ?? '-' }}</td>
                     <td class="p-4 text-gray-600">{{ \Carbon\Carbon::parse($event->date)->format('d M Y, H:i') }}</td>
                     <td class="p-4 text-gray-600">Rp {{ number_format($event->price, 0, ',', '.') }}</td>

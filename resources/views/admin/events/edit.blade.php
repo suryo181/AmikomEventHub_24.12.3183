@@ -3,7 +3,7 @@
 @section('content')
 <div class="p-6 max-w-4xl mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-gray-800">Menyunting Pengaturan Event</h2>
-    <form action="{{ route('admin.events.update', $event->id) }}" method="POST" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+    <form action="{{ route('admin.events.update', $event->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         @csrf
         @method('PUT')
 
@@ -66,6 +66,15 @@
             <label class="block mb-2 font-medium text-gray-700">Lokasi / Gedung</label>
             <input type="text" name="location" value="{{ $event->location }}" class="w-full border border-gray-300 p-2.5 rounded @error('location') border-red-500 @enderror" required>
             @error('location')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 font-medium text-gray-700">Poster Event</label>
+            <input type="file" name="poster" accept="image/*" class="w-full border border-gray-300 p-2.5 rounded @error('poster') border-red-500 @enderror">
+            <p class="text-gray-500 text-sm mt-2">Unggah file baru untuk mengganti poster lama. Maksimal 2MB.</p>
+            @error('poster')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
