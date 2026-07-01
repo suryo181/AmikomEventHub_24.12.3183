@@ -15,6 +15,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 Route::get('/checkout/{event}', [EventController::class, 'checkout'])->name('checkout');
 Route::post('/checkout/{event}', [EventController::class, 'processCheckout'])->name('checkout.process');
+Route::get('/payment/{order_id}', [EventController::class, 'payment'])->name('checkout.payment');
+Route::post('/payment/{order_id}/force-success', [EventController::class, 'forceSuccess'])->name('checkout.forceSuccess');
+Route::get('/payment/{order_id}/force-success', [EventController::class, 'forceSuccess'])->name('checkout.forceSuccess.get');
+Route::get('/success/{order_id}', [EventController::class, 'success'])->name('checkout.success');
 Route::get('/my-ticket/{transaction?}', [EventController::class, 'ticket'])->name('ticket');
 
 // Admin Area Routes
